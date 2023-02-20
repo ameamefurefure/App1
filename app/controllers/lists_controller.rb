@@ -5,8 +5,6 @@ class ListsController < ApplicationController
   # end
   # def show
   # end
-  # def edit
-  # end
   def new
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
     @list = List.new
@@ -27,6 +25,16 @@ class ListsController < ApplicationController
   
   def show
     @list = List.find(params[:id])
+  end
+  
+  def edit
+    @list = List.find(params[:id])
+  end
+  
+  def update
+    list = List.find(params[:id])
+    list.update(list_params)
+    redirect_to list_path(list.id)
   end
   
   private
