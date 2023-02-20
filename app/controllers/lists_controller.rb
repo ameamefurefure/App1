@@ -11,6 +11,7 @@ class ListsController < ApplicationController
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
     @list = List.new
   end
+  
   def create
     #1.&2. データを受け取り新規登録するためのインスタンス作成
     list = List.new(list_params)
@@ -18,6 +19,10 @@ class ListsController < ApplicationController
     list.save
     # 4. トップ画面へリダイレクト
     redirect_to '/top'
+  end
+  
+  def index
+    @lists = List.all
   end
 
   private
