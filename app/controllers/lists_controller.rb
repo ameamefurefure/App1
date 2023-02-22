@@ -9,13 +9,25 @@ class ListsController < ApplicationController
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
     @list = List.new
   end
+  
+  
+  # def create
+  #   @list = List.new(list_params)
+  #   if @list.save
+  #     redirect_to list_path(@list.id)
+  #   else
+  #     render :new
+  #   end
+  # end
+  
 
   def create
     #1.&2. データを受け取り新規登録するためのインスタンス作成
     list = List.new(list_params)
     # 3. データをデータベースに保存するためのsaveメソッド実行
     list.save
-    # 詳細画面へリダイレクト
+    # フラッシュメッセージを定義し、詳細画面へリダイレクト
+    flash[:notice] = "投稿が成功しました"
     redirect_to list_path(list. id)
   end
 
@@ -43,14 +55,15 @@ class ListsController < ApplicationController
     redirect_to '/lists' #投稿一覧画面へリダイレクト
   end
   
-  def create
-    @list = List.new(list_params)
-    if @list.save
-      redirect_to list_path(@list.id)
-    else
-      render :new
-    end
-  end
+  # def create
+  #   @list = List.new(list_params)
+  #   if @list.save
+  #     redirect_to list_path(@list.id)
+  #   else
+  #     render :new
+  #   end
+  # end
+  
   private
   # ストロングパラメータ
   def list_params
